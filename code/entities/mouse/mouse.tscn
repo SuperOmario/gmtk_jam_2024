@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c06xr0xeiircu"]
+
+[ext_resource type="Script" path="res://code/entities/mouse/mouse.gd" id="1_hmywr"]
+[ext_resource type="Texture2D" uid="uid://d20facv44hqjr" path="res://assets/textures/player.png" id="1_vvx30"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gvup"]
+radius = 8.06226
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwhm1"]
+atlas = ExtResource("1_vvx30")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5aofx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwhm1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="mouse" type="CharacterBody2D"]
+slide_on_ceiling = false
+script = ExtResource("1_hmywr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1gvup")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_5aofx")

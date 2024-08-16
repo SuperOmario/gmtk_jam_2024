@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c06xr0xeiircu"]
+[gd_scene load_steps=7 format=3 uid="uid://c06xr0xeiircu"]
 
 [ext_resource type="Script" path="res://code/entities/mouse/mouse.gd" id="1_hmywr"]
 [ext_resource type="Texture2D" uid="uid://d20facv44hqjr" path="res://assets/textures/player.png" id="1_vvx30"]
@@ -21,6 +21,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_54b60"]
+
 [node name="mouse" type="CharacterBody2D"]
 slide_on_ceiling = false
 script = ExtResource("1_hmywr")
@@ -31,3 +33,24 @@ shape = SubResource("CircleShape2D_1gvup")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_5aofx")
+
+[node name="CoyoteTime" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Sword" type="ShapeCast2D" parent="."]
+shape = SubResource("SegmentShape2D_54b60")
+target_position = Vector2(16, -11)
+collide_with_areas = true
+
+[node name="Cooldown" type="Timer" parent="Sword"]
+wait_time = 0.1
+one_shot = true

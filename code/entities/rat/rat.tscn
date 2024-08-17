@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2qlnrrvu2oiw"]
+
+[ext_resource type="Script" path="res://code/entities/rat/rat.gd" id="1_i4sv2"]
+[ext_resource type="PackedScene" uid="uid://dmbjvirt1b40d" path="res://code/misc/health/health.tscn" id="2_l1l2t"]
+[ext_resource type="PackedScene" uid="uid://dxoe8y28ehkas" path="res://code/entities/enemy/aggro_radius.tscn" id="3_xlaed"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or3up"]
+size = Vector2(110, 92)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kq7ph"]
+
+[node name="Rat" type="RigidBody2D"]
+script = ExtResource("1_i4sv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_or3up")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(106, 88)
+texture = SubResource("PlaceholderTexture2D_kq7ph")
+
+[node name="Health" parent="." instance=ExtResource("2_l1l2t")]
+max_health = 40
+
+[node name="AggroRadius" parent="." instance=ExtResource("3_xlaed")]
+
+[connection signal="damaged" from="Health" to="." method="_on_damaged"]
+[connection signal="died" from="Health" to="." method="_on_died"]
+[connection signal="body_entered" from="AggroRadius" to="." method="_on_aggro_radius_entered"]

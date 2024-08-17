@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d162bq0xw0r1x"]
+[gd_scene load_steps=7 format=3 uid="uid://d162bq0xw0r1x"]
 
 [ext_resource type="PackedScene" uid="uid://c06xr0xeiircu" path="res://code/entities/mouse/mouse.tscn" id="1_hwxsa"]
+[ext_resource type="PackedScene" uid="uid://c2qlnrrvu2oiw" path="res://code/entities/rat/rat.tscn" id="2_ehblc"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_d225s"]
 size = Vector2(1000, 50)
@@ -15,7 +16,7 @@ size = Vector2(45, 109)
 
 [node name="main" type="Node2D"]
 
-[node name="mouse" parent="." instance=ExtResource("1_hwxsa")]
+[node name="Mouse" parent="." instance=ExtResource("1_hwxsa")]
 position = Vector2(252, 378)
 scale = Vector2(5, 5)
 
@@ -40,3 +41,6 @@ mesh = SubResource("CylinderMesh_g7kv8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_32cr2")
+
+[node name="Rat" parent="." instance=ExtResource("2_ehblc")]
+position = Vector2(831, 299)

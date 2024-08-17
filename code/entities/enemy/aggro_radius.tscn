@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxoe8y28ehkas"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tlass"]
+radius = 501.1
+
+[node name="AggroRadius" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tlass")

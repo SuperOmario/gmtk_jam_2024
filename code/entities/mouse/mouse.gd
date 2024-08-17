@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 class_name Mouse
 
 @export var speed := 300.0
@@ -8,6 +7,7 @@ class_name Mouse
 @export var jump_velocity := 500
 @export var health := 50
 @export var max_health := 50
+@export var sword_damage := 20
 
 @onready var coyote_timer := $CoyoteTime
 @onready var jump_buffer := $JumpBuffer
@@ -55,19 +55,25 @@ func get_movement_input(delta) -> Vector2:
 	return direction	
 
 
-func get_attack_input(delta) -> void:
+func get_attack_input() -> void:
 	if Input.is_action_just_pressed("melee_attack") && can_attack:
 		can_attack = false
 		melee_cooldown.start()
 		if sword.is_colliding():
 			print("Hit!")
+			for i in sword.get_collision_count():
+				print("AVAST!")
+				if sword.get_collider(i) is Enemy: 
+					print("Tis' a draw!")
+					sword.get_collider(i).health.take_damage(sword_damage)
+			
 
 
 func _physics_process(delta) -> void:
 	if can_attack == false && melee_cooldown.is_stopped():
 		can_attack = true
 	direction = get_movement_input(delta)
-	get_attack_input(delta)
+	get_attack_input()
 	if direction != Vector2.ZERO:
 		last_direction = direction
 		velocity = direction
@@ -75,21 +81,6 @@ func _physics_process(delta) -> void:
 		move_and_slide()
 		if was_on_floor && !is_on_floor():
 			coyote_timer.start()
-
-
-func take_damage(damage):
-	if (health - damage) < 0:
-		health = 0
-		die()
-	else:
-		health -= damage
-
-
-func heal(healing):
-	if (max_health - health) < healing:
-		health = max_health
-	else:
-		health += healing
 
 
 func die():

@@ -26,7 +26,7 @@ func take_damage(damage : int) -> void:
 		_die()
 	else:
 		_set_health( _get_health() - damage )
-		emit_signal("damaged", _get_health())
+		emit_signal("damaged")
 
 
 func heal(healing : int) -> void:

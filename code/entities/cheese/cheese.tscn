@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyyww4p51l74l"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_surdy"]
+
+[node name="Cheese" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(10, 10, 0, -10, -10, 10)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(-4.76837e-07, 2.38419e-07)
+scale = Vector2(20, -20)
+mesh = SubResource("PrismMesh_surdy")

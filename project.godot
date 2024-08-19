@@ -50,4 +50,4 @@ melee_attack={
 
 [physics]
 
-2d/default_gravity=50.0
+2d/default_gravity=40.0

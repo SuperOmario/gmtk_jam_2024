@@ -1,39 +1,123 @@
-[gd_scene load_steps=8 format=3 uid="uid://c06xr0xeiircu"]
+[gd_scene load_steps=17 format=3 uid="uid://c06xr0xeiircu"]
 
 [ext_resource type="Script" path="res://code/entities/mouse/mouse.gd" id="1_hmywr"]
-[ext_resource type="Texture2D" uid="uid://d20facv44hqjr" path="res://assets/textures/player.png" id="1_vvx30"]
+[ext_resource type="Texture2D" uid="uid://c1i2hocnh58o0" path="res://assets/textures/mouseboy_small-Sheet.png" id="2_opy60"]
 [ext_resource type="PackedScene" uid="uid://dmbjvirt1b40d" path="res://code/misc/health/health.tscn" id="3_3wucs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1gvup"]
-radius = 8.06226
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t372a"]
+radius = 12.0
+height = 50.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nwhm1"]
-atlas = ExtResource("1_vvx30")
-region = Rect2(0, 0, 30, 30)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5arn"]
+atlas = ExtResource("2_opy60")
+region = Rect2(4800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idae5"]
+atlas = ExtResource("2_opy60")
+region = Rect2(5600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ogm"]
+atlas = ExtResource("2_opy60")
+region = Rect2(7200, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1axp"]
+atlas = ExtResource("2_opy60")
+region = Rect2(8800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r767g"]
+atlas = ExtResource("2_opy60")
+region = Rect2(9600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haiyu"]
+atlas = ExtResource("2_opy60")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7e62"]
+atlas = ExtResource("2_opy60")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_742kj"]
+atlas = ExtResource("2_opy60")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsfjq"]
+atlas = ExtResource("2_opy60")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vcgb"]
+atlas = ExtResource("2_opy60")
+region = Rect2(2400, 0, 800, 800)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5aofx"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nwhm1")
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t5arn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_idae5")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_c7ogm")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_q1axp")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_r767g")
 }],
 "loop": true,
-"name": &"default",
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haiyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7e62")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_742kj")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsfjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vcgb")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_54b60"]
+a = Vector2(3, 2.08165e-12)
+b = Vector2(2, 20)
 
 [node name="Mouse" type="CharacterBody2D"]
-slide_on_ceiling = false
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_hmywr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1gvup")
+shape = SubResource("CapsuleShape2D_t372a")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -7)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -8)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_5aofx")
+animation = &"idle"
 
 [node name="CoyoteTime" type="Timer" parent="."]
 wait_time = 0.15
@@ -48,13 +132,24 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Sword" type="ShapeCast2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("SegmentShape2D_54b60")
-target_position = Vector2(16, -11)
+target_position = Vector2(54, -8)
+max_results = 30
+collision_mask = 4
 collide_with_areas = true
 
 [node name="Cooldown" type="Timer" parent="Sword"]
-wait_time = 0.1
+wait_time = 0.4
 one_shot = true
 
 [node name="Health" parent="." instance=ExtResource("3_3wucs")]
 max_health = 100
+
+[node name="InvincibilityFrames" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

@@ -36,10 +36,17 @@ script = ExtResource("1_37yrm")
 
 [node name="Mouse" parent="." instance=ExtResource("1_hwxsa")]
 z_index = 1
-position = Vector2(59, 372)
+position = Vector2(69, 369)
 scale = Vector2(1.5, 1.5)
 
 [node name="Camera2D" type="Camera2D" parent="Mouse"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Mouse"]
+position = Vector2(-39.3333, -248)
+scale = Vector2(0.666667, 0.666667)
+stream = ExtResource("3_pqslj")
+volume_db = 1.0
+autoplay = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(513, 445)
@@ -120,12 +127,8 @@ position = Vector2(-0.5, -440)
 shape = SubResource("RectangleShape2D_32cr2")
 
 [node name="Rat" parent="." instance=ExtResource("2_ehblc")]
-position = Vector2(896, 376)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_pqslj")
-volume_db = 1.0
-autoplay = true
+position = Vector2(762, 335)
+scale = Vector2(0.7, 0.7)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(843, 137)
@@ -260,13 +263,18 @@ scale = Vector2(5, 5)
 collision_mask = 3
 
 [node name="Rat2" parent="." instance=ExtResource("2_ehblc")]
-position = Vector2(2048, 358)
+position = Vector2(1300, 147)
+scale = Vector2(0.7, 0.7)
 
 [node name="Rat3" parent="." instance=ExtResource("2_ehblc")]
-position = Vector2(1457, 174)
+position = Vector2(2201, 330)
+scale = Vector2(0.7, 0.7)
 
 [node name="Rat4" parent="." instance=ExtResource("2_ehblc")]
-position = Vector2(1452, -306)
+position = Vector2(1502, -372)
 
 [connection signal="damage_player" from="Rat" to="Mouse" method="_on_enemy_damage_player"]
 [connection signal="body_entered" from="Cheese" to="." method="_on_cheese_entered"]
+[connection signal="damage_player" from="Rat2" to="Mouse" method="_on_enemy_damage_player"]
+[connection signal="damage_player" from="Rat3" to="Mouse" method="_on_enemy_damage_player"]
+[connection signal="damage_player" from="Rat4" to="Mouse" method="_on_enemy_damage_player"]

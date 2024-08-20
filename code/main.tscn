@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://d162bq0xw0r1x"]
+[gd_scene load_steps=16 format=3 uid="uid://d162bq0xw0r1x"]
 
 [ext_resource type="Script" path="res://code/main.gd" id="1_37yrm"]
 [ext_resource type="PackedScene" uid="uid://c06xr0xeiircu" path="res://code/entities/mouse/mouse.tscn" id="1_hwxsa"]
 [ext_resource type="PackedScene" uid="uid://c2qlnrrvu2oiw" path="res://code/entities/rat/rat.tscn" id="2_ehblc"]
+[ext_resource type="PackedScene" uid="uid://ir2y0phn1nlk" path="res://code/menu/ui.tscn" id="2_t37ec"]
 [ext_resource type="AudioStream" uid="uid://cc4boe1jbf3yw" path="res://assets/audio/music/Adventures in Adventureland.mp3" id="3_pqslj"]
 [ext_resource type="PackedScene" uid="uid://cyyww4p51l74l" path="res://code/entities/cheese/cheese.tscn" id="4_0m4ii"]
 
@@ -21,7 +22,7 @@ size = Vector2(1002, 50)
 [sub_resource type="CylinderMesh" id="CylinderMesh_g7kv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32cr2"]
-size = Vector2(45, 1086)
+size = Vector2(45, 1657)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehhtf"]
 size = Vector2(46, 198)
@@ -33,6 +34,8 @@ size = Vector2(92, 46)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_37yrm")
+
+[node name="UI" parent="." instance=ExtResource("2_t37ec")]
 
 [node name="Mouse" parent="." instance=ExtResource("1_hwxsa")]
 z_index = 1
@@ -94,12 +97,12 @@ shape = SubResource("RectangleShape2D_h3hul")
 position = Vector2(-5, 365)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D5"]
-position = Vector2(2.08165e-12, -439)
-scale = Vector2(45.75, 545)
+position = Vector2(2.08165e-12, -724.5)
+scale = Vector2(45.75, 830.5)
 mesh = SubResource("CylinderMesh_g7kv8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-position = Vector2(-0.5, -440)
+position = Vector2(0, -728)
 shape = SubResource("RectangleShape2D_32cr2")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
@@ -118,12 +121,12 @@ shape = SubResource("RectangleShape2D_ehhtf")
 position = Vector2(2470, 362)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D7"]
-position = Vector2(2.08165e-12, -439)
-scale = Vector2(45.75, 545)
+position = Vector2(2.08165e-12, -724)
+scale = Vector2(45.75, 830)
 mesh = SubResource("CylinderMesh_g7kv8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
-position = Vector2(-0.5, -440)
+position = Vector2(-0.5, -725.5)
 shape = SubResource("RectangleShape2D_32cr2")
 
 [node name="Rat" parent="." instance=ExtResource("2_ehblc")]
@@ -258,8 +261,7 @@ mesh = SubResource("QuadMesh_d225s")
 shape = SubResource("RectangleShape2D_h3hul")
 
 [node name="Cheese" parent="." instance=ExtResource("4_0m4ii")]
-position = Vector2(973, -786)
-scale = Vector2(5, 5)
+position = Vector2(1029, -899)
 collision_mask = 3
 
 [node name="Rat2" parent="." instance=ExtResource("2_ehblc")]
@@ -273,6 +275,7 @@ scale = Vector2(0.7, 0.7)
 [node name="Rat4" parent="." instance=ExtResource("2_ehblc")]
 position = Vector2(1502, -372)
 
+[connection signal="health_changed" from="Mouse" to="UI" method="_on_player_health_changed"]
 [connection signal="damage_player" from="Rat" to="Mouse" method="_on_enemy_damage_player"]
 [connection signal="body_entered" from="Cheese" to="." method="_on_cheese_entered"]
 [connection signal="damage_player" from="Rat2" to="Mouse" method="_on_enemy_damage_player"]

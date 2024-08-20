@@ -139,6 +139,7 @@ left_position = Vector2(-34, -5)
 right_position = Vector2(34, -5)
 
 [node name="Health" parent="." instance=ExtResource("3_3wucs")]
+health = 100
 max_health = 100
 
 [node name="InvincibilityFrames" type="Timer" parent="."]

@@ -33,6 +33,7 @@ var is_invincible := false
 var hit_enemies := []
 
 signal change_direction
+signal health_changed
 
 func get_movement_input(_delta) -> Vector2:
 	if is_taking_damage:
@@ -132,14 +133,16 @@ func _physics_process(delta) -> void:
 
 
 func _ready():
+	emit_signal("health_changed", health.health)
+	_on_damaged(health.health)
 	health.damaged.connect(_on_damaged)
 	health.died.connect(_on_died)
 	knockback_timer.timeout.connect(_on_knockback_timeout)
 	invincibility.timeout.connect(_on_invcinvibility_timeout)
 
 
-func _on_damaged():
-	pass
+func _on_damaged(new_health):
+	emit_signal("health_changed", new_health)
 
 
 func _on_knockback_timeout():
@@ -151,7 +154,7 @@ func _on_invcinvibility_timeout():
 
 
 func _on_died():
-	print("Dead")
+	get_tree().change_scene_to_file("res://code/menu/death_menu.tscn")
 
 
 func _on_enemy_damage_player(enemy_position):

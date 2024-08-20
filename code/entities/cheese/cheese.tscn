@@ -1,14 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://cyyww4p51l74l"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_surdy"]
+[ext_resource type="Texture2D" uid="uid://4j8dhprmow8q" path="res://assets/textures/Cheese.png" id="1_emnaw"]
 
 [node name="Cheese" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(10, 10, 0, -10, -10, 10)
+polygon = PackedVector2Array(108, -213, -66, -242, -227, -35, -229, 198, 230, 97, 221, -133)
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
 position = Vector2(-4.76837e-07, 2.38419e-07)
-scale = Vector2(20, -20)
-mesh = SubResource("PrismMesh_surdy")
+texture = ExtResource("1_emnaw")

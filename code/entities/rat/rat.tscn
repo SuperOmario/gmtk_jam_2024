@@ -107,6 +107,7 @@ sprite_frames = SubResource("SpriteFrames_0aaa3")
 animation = &"attack"
 
 [node name="Health" parent="." instance=ExtResource("2_l1l2t")]
+health = 40
 max_health = 40
 
 [node name="AggroRadius" parent="." instance=ExtResource("3_xlaed")]
